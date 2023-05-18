@@ -16,13 +16,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
 
     <script>
-        const url = 'https://www.thesportsdb.com/api/v1/json/3/all_leagues.php';
-const apiKey = '3';
-
-fetch(url + '3' + apiKey)
-  .then(response => response.json())
-  .then(data => console.log(data));
-      </script>
+      function HavaDurumuGetir( cityID, key ) {
+      fetch('https://api.openweathermap.org/data/2.5/weather?q=' + cityID+ '&lang=tr&appid=' + key ) 
+      .then(function(resp) { return resp.json() }) 
+      .then(function(data) {
+      HavaDurumuGoster(data);
+      });
+      }
+      function HavaDurumuGoster( d ) {
+      var celcius = Math.round(parseFloat(d.main.temp)-273.15);
+      var fahrenheit = Math.round(((parseFloat(d.main.temp)-273.15)*1.8)+32);
+      var aciklama = d.weather[0].description; 
+      document.getElementById('aciklama').innerHTML = aciklama;
+      document.getElementById('sicaklik').innerHTML = celcius + '&deg;';
+      document.getElementById('konum').innerHTML = d.name;
+      }
+    </script>
 
   </head>
   <body>
@@ -34,11 +43,11 @@ fetch(url + '3' + apiKey)
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav ml-auto">
-          <a class="nav-link active" href="Hakkımda.html">Hakkımda <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="Hakkımda.html">Hakkımda <span class="sr-only">(current)</span></a>
           <a class="nav-link" href="Öz-Geçmiş.html">Öz Geçmiş</a>
           <a class="nav-link" href="Şehrim.html">Şehrim</a>
           <a class="nav-link" href="Mirasımız.html">Mirasımız</a>
-          <a class="nav-link" href="İlgi-Alanlarım.html">İlgi Alanlarım</a>
+          <a class="nav-link active" href="İlgi-Alanlarım.html">İlgi Alanlarım</a>
           <a class="nav-link" href="İletişim-Sayfası.html">İletişim Sayfası</a>
           <a class="nav-link" href="Login.html">Login</a>
         </div>
@@ -46,13 +55,32 @@ fetch(url + '3' + apiKey)
     </nav>
     <!-- Navbar - End -->
 
+        <!-- Header - Start -->
+        <header class="container">
+          <section class="row mt-2">
+              <article class="col-sm-12">
+                  <h1 style="text-align: center; color: #007bff;">Hava Durumu</h1>
+              </article>
+          </section>
+      </header>
+      <!-- Header - End -->
+
     <!-- Main - Start -->
-<script>
-    fetch();
-</script>
+    <main class="container">
+      <section class="row">
+        <article class="col-sm-12">
+          <button id = "Goster" onclick = "HavaDurumuGetir('sakarya' , '4184fb83fe651c3f7eb5059344fbd0d1')">Sakarya'nın Hava Durumunu Göster</button>
+          <div>
+          <div id="aciklama"></div>
+          <h1 id="sicaklik"></h1>
+          <div id="konum"></div>
+          </div>
+        </article>
+      </section>
+    </main>
     <!-- Main - End -->
 
-    <br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
     <hr>
 
     <!-- Footer - Start -->
