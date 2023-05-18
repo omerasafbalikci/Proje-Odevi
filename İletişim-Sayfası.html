@@ -15,6 +15,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
 
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
   </head>
   <body>
     <!-- Navbar - Start -->
@@ -41,7 +43,7 @@
     <header class="container">
         <section class="row mt-2">
             <article class="col-sm-12">
-                <h1 style="text-align: center; color: #007bff;">Login</h1>
+                <h1 style="text-align: center; color: #007bff;">İletişim Sayfası</h1>
             </article>
         </section>
     </header>
@@ -49,21 +51,64 @@
 
     <!-- Main - Start -->
     <main class="container">
-        <section class="row">
-            <article class="col-sm-12">
-                <form action="action-page.php">
-                    Kullanıcı Adı: <br>
-                    <input type="email" name="kullanici" required autofocus autocomplete="on" placeholder="b1812100001@sakarya.edu.tr şeklindeki kullanıcı adınızı girin." size="70"> <br>
-                    Şifre: <br>
-                    <input type="password" name="sifre" required size="70"> <br> <br>
-                    <input type="submit" value="LOGİN">
+        <section class="row mt-2">
+            <div class="col-sm-12" id="form">
+                <form action="form-elemanları.php" @submit.prevent="handleSubmit">
+                  <input type="text" v-model="name" required placeholder="Adınız..." size="70"> <br><br>
+                  <input type="text" v-model="surname" required placeholder="Soyadınız..." size="70"> <br><br>
+                  <input type="email" v-model="email" required placeholder="E-posta adresiniz..." size="70"> <br><br>
+                  <button type="submit">Gönder</button>
+                  <button type="button" @click="clearForm">Temizle</button>
                 </form>
-            </article>
+            </div>
         </section>
     </main>
     <!-- Main - End -->
+    
+    <!-- Script - Start -->
+    <script>
+      new Vue({
+        el: '#form',
+        data() {
+          return {
+            name: '',
+            surname: '',
+            email: ''
+          };
+        },
+        methods: {
+          handleSubmit() {
 
-    <br><br><br><br><br><br><br><br><br><br><br><br>
+            if (this.name === '') {
+              alert('Lütfen adınızı giriniz.');
+              return;
+            }
+            if (this.surname === '') {
+              alert('Lütfen soyadınızı giriniz.');
+              return;
+            }
+            if (!this.isValidEmail(this.email)) {
+              alert('Lütfen geçerli bir e-posta adresi giriniz.');
+              return;
+            }
+
+          },
+          clearForm() {
+            this.name = '';
+            this.surname = '';
+            this.email = '';
+          },
+          isValidEmail(email) {
+            // E-posta formatı kontrolü
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+          }
+        }
+      });
+    </script>
+    <!-- Script - End -->
+
+    <br><br><br><br><br><br><br><br><br><br><br><br><br>
     <hr>
 
     <!-- Footer - Start -->
