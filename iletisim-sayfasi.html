@@ -8,12 +8,14 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 
-    <title>Ömer Asaf BALIKÇI - Login</title>
+    <title>Ömer Asaf BALIKÇI - İletişim Sayfası</title>
     <link rel="icon" href="van-golu-vektor-seeklogo.com.ico">
     <link rel="stylesheet" href="css/ortak.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
   </head>
   <body>
@@ -30,8 +32,8 @@
           <a class="nav-link" href="sehrim.html">Şehrim</a>
           <a class="nav-link" href="takimimiz.html">Takımımız</a>
           <a class="nav-link" href="ilgi-alanlarim.html">İlgi Alanlarım</a>
-          <a class="nav-link" href="iletisim-sayfasi.html">İletişim Sayfası</a>
-          <a class="nav-link active" href="login.html">Login</a>
+          <a class="nav-link active" href="iletisim-sayfasi.html">İletişim Sayfası</a>
+          <a class="nav-link" href="login.html">Login</a>
         </div>
       </div>
     </nav>
@@ -41,7 +43,7 @@
     <header class="container">
         <section class="row mt-5">
             <article class="col-sm-12">
-                <h1 style="text-align: center; color: #007bff;">Login</h1>
+                <h1 style="text-align: center; color: #007bff;">İletişim Sayfası</h1>
             </article>
         </section>
     </header>
@@ -50,20 +52,71 @@
     <!-- Main - Start -->
     <main class="container">
         <section class="row mt-3">
-            <article class="col-sm-12">
-                <form action="action-page.php" method="post">
-                    Kullanıcı Adı: <br>
-                    <input type="email" name="kullanici" required autofocus autocomplete="on" placeholder="b1812100001@sakarya.edu.tr şeklindeki kullanıcı adınızı girin..." size="70" style="border-color: #007bff;"> <br>
-                    Şifre: <br>
-                    <input type="password" name="sifre" required size="70" style="border-color: #007bff;"> <br> <br>
-                    <input type="submit" value="LOGİN" style="background-color: #007bff; color: white; border-color: white;">
+            <div class="col-sm-12">
+                <form action="form-elemanlari.php" id="myForm" method="post">
+                  <label for="name">Adı :</label> <br>
+                  <input type="text" id="name" v-model="name" name="name" placeholder="Adınız..." size="70"  style="border-color: #007bff;"> <br><br>
+                
+                  <label for="surname">Soyadı :</label> <br>
+                  <input type="text" id="surname" v-model="surname" name="surname" placeholder="Soyadınız..." size="70" required style="border-color: #007bff;"> <br><br>
+
+                  <select id="gender" name="gender" style="border-color: #007bff;">
+                    <option value="Erkek">ERKEK</option>
+                    <option value="Kadin">KADIN</option>
+                  </select><br><br>
+                
+                  <label for="email">E-Posta :</label> <br>
+                  <input type="email" id="email" v-model="email" name="email" placeholder="E-posta adresiniz..." size="70" required style="border-color: #007bff;"> <br><br>
+                
+                  <label for="agreement">Kabul ediyorum :</label>
+                  <input type="checkbox" id="agreement" v-model="agreement" name="agreement" required> <br><br>
+                
+                  <button type="submit" style="background-color: #007bff; color: white; border-color: white;">GÖNDER (JavaScript)</button>
+
+                  <input type="reset" value="TEMİZLE" style="background-color: #007bff; color: white; border-color: white;">
                 </form>
-            </article>
+            </div>
         </section>
     </main>
     <!-- Main - End -->
+    
+    <!-- Script - Start -->
+    <script>
+    document.getElementById("myForm").addEventListener("submit", function(event) {
+      event.preventDefault();
 
-    <br><br><br><br><br><br><br><br><br><br><br><br>
+      const nameInput = document.getElementById("name");
+      const surnameInput = document.getElementById("surname");
+      const emailInput = document.getElementById("email");
+      const agreementInput = document.getElementById("agreement");
+
+      if (nameInput.value === "" || nameInput.value === " ") {
+        alert("Lütfen adınızı girin.");
+        return;
+      }
+      if (surnameInput.value === "" || surnameInput.value === " ") {
+        alert("Lütfen soyadınızı girin.");
+        return;
+      }
+      if (!isValidEmail(emailInput.value)) {
+        alert("Lütfen e-posta hesabınızı girin.");
+        return;
+      }
+      if (!agreementInput.checked) {
+        alert("Lütfen onay kutusunu işaretleyin.");
+        return;
+      }
+      this.submit();
+    });
+
+    function isValidEmail(email) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(email);
+    }
+    </script>
+    <!-- Script - End -->
+
+    <br><br><br><br><br><br><br><br><br><br><br><br><br>
     <hr>
 
     <!-- Footer - Start -->

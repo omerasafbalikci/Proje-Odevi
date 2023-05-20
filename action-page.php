@@ -5,11 +5,11 @@
     {
         echo "Giriş Başarılı. Hoşgeldiniz&nbsp;&nbsp;";
         echo "<b>" . $kullanici . '&nbsp;&nbsp;&nbsp;' . $sifre . "</b>";
-        echo "<p> <a href='Hakkımda.html'>ANA SAYFAYA GİT</a></p>";
+        echo "<p> <a href='index.html'>ANA SAYFAYA GİT</a></p>";
     }
     else
     {
         echo "Bilgilerinizi kontrol edip tekrar giriş yapınız.<br>";
-        echo "<p> <a href='Login.html'>LOGİN SAYFASINA DÖN</a></p>";
+        echo "<p> <a href='login.html'>LOGİN SAYFASINA DÖN</a></p>";
     }
 ?>
