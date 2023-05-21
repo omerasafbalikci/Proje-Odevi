@@ -3,7 +3,7 @@
     $sifre = $_POST['sifre'];
     if(isset($kullanici, $sifre) && ($kullanici!='') && ($sifre==substr($kullanici, 0, 10)))
     {
-        echo "Giriş Başarılı. Hoşgeldiniz&nbsp;&nbsp;";
+        echo "Giriş Başarılı. Hoş geldiniz&nbsp;&nbsp;";
         echo "<b>" . $kullanici . '&nbsp;&nbsp;&nbsp;' . $sifre . "</b>";
         echo "<p> <a href='index.html'>ANA SAYFAYA GİT</a></p>";
     }
